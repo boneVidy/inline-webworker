@@ -1,0 +1,25 @@
+{
+  "name": "inline-webworker",
+  "version": "1.0.0",
+  "description": "inline webworker",
+  "main": "./bind/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boneVidy/inline-webworker.git"
+  },
+  "keywords": [
+    "webworker",
+    "typescript",
+    "inline",
+    "webworker"
+  ],
+  "author": "boneVidy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/boneVidy/inline-webworker/issues"
+  },
+  "homepage": "https://github.com/boneVidy/inline-webworker#readme"
+}

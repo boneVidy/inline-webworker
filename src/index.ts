@@ -1,44 +1,51 @@
-class InlineWebWorker implements Worker {
-    // @ts-ignore
+class InlineWebWorker  {
     public get onerror() {
       return  this.worker.onerror;
     };
-    public set onerror(errorhandler:  ((this: Worker, ev: MessageEvent) => any) | null) {
+    public set onerror(errorhandler: AbstractWorker["onerror"]) {
         this.worker.onerror = errorhandler;
     }
-    public onmessage: ((this: Worker, ev: MessageEvent) => any) | null;
-    postMessage(message: any, transfer?: any[] | undefined): void {
+    public get onmessage() {
+        return  this.worker.onmessage;
+      };
+    public set onmessage(messagehandler: Worker["onmessage"]) {
+        this.worker.onmessage = messagehandler;
+    }
+   
+    
+    private worker: Worker;
+    constructor (task: Function) {
+        if (task) {
+            const taskStrs = task.toString().trim().match(
+                /^function\s*\w*\s*\([\w\s,]*\)\s*{([\w\W]*?)}$/
+                );
+            if (taskStrs && taskStrs.length >= 2) {
+                this.worker = new Worker(URL.createObjectURL(
+                    new Blob([taskStrs[1]], { type: "text/javascript" })
+                    ));
+                return;
+            }
+            
+        }
+        throw new Error("must has a function agument")
+     }
+     postMessage(message: any, transfer?: any[] | undefined): void {
         this.worker.postMessage(message, transfer);
     }
     terminate(): void {
         this.worker.terminate();
     }
-    addEventListener<K extends "message" | "error">(type: K, listener: (this: Worker, ev: WorkerEventMap[K]) => , options?: boolean | AddEventListenerOptions | undefined): void;
+    addEventListener<K extends "message" | "error">(type: K, listener: (this: Worker, ev: WorkerEventMap[K]) => void, options?: boolean | AddEventListenerOptions | undefined): void;
     addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
     addEventListener(type: any, listener: any, options?: any) {
         this.worker.addEventListener(type, listener, options);
     }
-    removeEventListener<K extends "message" | "error">(type: K, listener: (this: Worker, ev: WorkerEventMap[K]) => , options?: boolean | EventListenerOptions | undefined): void;
+    removeEventListener<K extends "message" | "error">(type: K, listener: (this: Worker, ev: WorkerEventMap[K]) => void, options?: boolean | EventListenerOptions | undefined): void;
     removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions | undefined): void;
     removeEventListener(type: any, listener: any, options?: any) {
-
-        throw new Error("Method not implemented.");
+        this.worker.removeEventListener(type, listener, options);
     }
     dispatchEvent(evt: Event): boolean {
-        throw new Error("Method not implemented.");
+        return this.worker.dispatchEvent(evt);
     }
-    
-    private worker: Worker;
-    constructor (task: Function) {
-        const taskStr = task.toString();
-        this.worker = new Worker(URL.createObjectURL(
-            new Blob([ taskStr ], { type: "text/javascript" })
-          ));
-     }
-
-
-    // public addEventListener (handler) {
-    //     this.worker.addEventListener('message', handler);
-    //     this.onMessageHandlers.push(handler);
-    // }
 }

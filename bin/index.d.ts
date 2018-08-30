@@ -1,4 +1,4 @@
-declare class InlineWebWorker {
+export default class InlineWebWorker {
     onerror: AbstractWorker["onerror"];
     onmessage: Worker["onmessage"];
     private worker;

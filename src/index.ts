@@ -1,4 +1,4 @@
-class InlineWebWorker  {
+export default class InlineWebWorker  {
     public get onerror() {
       return  this.worker.onerror;
     };

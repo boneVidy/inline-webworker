@@ -1,3 +1,4 @@
 .dist/
 example/.cache/
 example/dist/
+node_modules/

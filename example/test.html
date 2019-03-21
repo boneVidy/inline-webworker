@@ -5,32 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="../bin/index.js"></script>
+    <script src="src/index.js"></script>
 </head>
 <body>
-    
+    <div id="app"></div>
 </body>
 <script>
 
-    var worker = new InlineWebWorker(function run () {
-        const sleep = function  (delay) {
-            const startTime = Date.now();
-            const endTime = Date.now() + delay;
-
-            while (true) {
-                if (endTime - Date.now() <= 0) {
-                    return;
-                }
-            }
-        }
-        while(true) {
-            sleep(1000);
-            console.log('worker is woking');
-            self.postMessage("halo")
-        }
-    });
-    worker.addEventListener('message', (data) => {
-        console.log(data);
-    })
+    
 </script>
 </html>

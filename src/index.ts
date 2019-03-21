@@ -47,9 +47,13 @@ export default class InlineWebWorker  {
                 /^function\s*\w*\s*\([\w\s,]*\)\s*{([\w\W]*?)}$/
                 );
             if (taskStrs && taskStrs.length >= 2) {
+
+                const blob = new Blob([taskStrs[1]], { type: "text/javascript" });
                 this.worker = new Worker(URL.createObjectURL(
-                    new Blob([taskStrs[1]], { type: "text/javascript" })
+                    blob
                     ));
+                // @ts-ignore
+                URL.revokeObjectURL(blob);
                 return;
             }
             

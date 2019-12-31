@@ -3,7 +3,7 @@
  *
  * @export
  * @class InlineWebWorker
- * @example 
+ * @example
  * var worker = new InlineWebWorker(function run () {
         const sleep = function  (delay) {
             const startTime = Date.now();
@@ -38,8 +38,12 @@ export default class InlineWebWorker  {
     public set onmessage(messagehandler: Worker["onmessage"]) {
         this.worker.onmessage = messagehandler;
     }
-   
-    
+
+
+    public static create (task: Function) {
+        return new InlineWebWorker(task);
+    }
+
     private worker: Worker;
     constructor (task: Function) {
         if (task) {
@@ -56,7 +60,7 @@ export default class InlineWebWorker  {
                 URL.revokeObjectURL(blob);
                 return;
             }
-            
+
         }
         throw new Error("must has a function agument")
      }

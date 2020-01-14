@@ -1,6 +1,7 @@
 # inline-webworker
 ```js
-    var worker = new InlineWebWorker(function run () {
+    import InlineWebWorker from 'ts-inline-webworker'
+    const worker = new InlineWebWorker(function run () {
         const sleep = function  (delay) {
             const startTime = Date.now();
             const endTime = Date.now() + delay;

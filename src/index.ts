@@ -25,7 +25,7 @@
         console.log(data);
     })
  */
-export default class InlineWebWorker  {
+export  class InlineWebWorker  {
     public get onerror() {
       return  this.worker.onerror;
     };

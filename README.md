@@ -13,7 +13,7 @@
             }
         }
         sleep(1000000);
-        self.postMessage('message', 'halo main thread');
+        self.postMessage('message', 'halo from other thread');
     });
     worker.addEventListener('message', (data) => {
         console.log(data);

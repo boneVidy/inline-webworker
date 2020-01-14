@@ -4,7 +4,9 @@
  * @export
  * @class InlineWebWorker
  * @example
- * var worker = new InlineWebWorker(function run () {
+ *
+ * import {InlineWebWorker} from 'ts-inline-webworker'
+    const worker = new InlineWebWorker(function run () {
         const sleep = function  (delay) {
             const startTime = Date.now();
             const endTime = Date.now() + delay;
@@ -15,11 +17,8 @@
                 }
             }
         }
-        while(true) {
-            sleep(1000);
-            console.log('worker is woking');
-            self.postMessage("halo")
-        }
+        sleep(1000000);
+        self.postMessage('message', 'halo from other thread');
     });
     worker.addEventListener('message', (data) => {
         console.log(data);

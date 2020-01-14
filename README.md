@@ -1,6 +1,6 @@
 # inline-webworker
 ```bash
-npm install ts-inlien-webworker --save
+npm install ts-inline-webworker --save
 ```
 
 ```js

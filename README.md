@@ -1,4 +1,8 @@
 # inline-webworker
+```bash
+npm install ts-inlien-webworker --save
+```
+
 ```js
     import {InlineWebWorker} from 'ts-inline-webworker'
     const worker = new InlineWebWorker(function run () {
